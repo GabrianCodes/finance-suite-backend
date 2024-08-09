@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 // Used in the algorithm for encrypting our data which makes it difficult to decode the information without the defined secret keyword.
-const secret = "ECommerceAPI";
+const secret = "FinanceSuitableAPI";
 
 
 
