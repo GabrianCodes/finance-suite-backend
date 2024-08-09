@@ -1,0 +1,11 @@
+{
+    "url": "https://csp2-ecommerce-backend.onrender.com",
+    "routesPrefix": {
+
+        "users": "/users",
+        "products": "/products",
+        "orders": "/orders",
+        "cart": "/cart"
+
+    }
+}
