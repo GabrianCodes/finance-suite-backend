@@ -1,5 +1,5 @@
 const express = require("express");
-const sourceTypeController = require("../controllers/SourceType");
+const sourceTypeController = require("../controllers/sourceType");
 const auth = require("../auth");
 
 const { verify, verifyAdmin } = auth;
