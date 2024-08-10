@@ -7,6 +7,10 @@ const sourceTypeSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    userId: {
+        type: String,
+        required: [true, 'User ID is required!']
     }
 });
 
