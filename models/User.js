@@ -1,4 +1,3 @@
-//[Section] Activity
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -18,10 +17,6 @@ const userSchema = new mongoose.Schema({
 	isAdmin: {
 		type: Boolean,
 		default: false
-	},
-	mobileNo: {
-		type: String,
-		required: [true, 'Mobile Number is Required']
 	}
 });
 

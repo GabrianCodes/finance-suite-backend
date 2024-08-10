@@ -18,8 +18,6 @@ router.patch("/:userId/set-as-admin", verify, verifyAdmin, userController.setAsA
 
 router.patch("/update-password", verify, userController.updatePassword);
 
-router.get("/user-details/:userId", verify, verifyAdmin, userController.singleUserDetails);
-
 
 
 // Export Route System

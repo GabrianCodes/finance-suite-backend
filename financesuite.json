@@ -1,11 +1,12 @@
 {
-    "url": "https://csp2-ecommerce-backend.onrender.com",
+    "url": "https://finance-suite-backend.onrender.com",
     "routesPrefix": {
 
         "users": "/users",
-        "products": "/products",
-        "orders": "/orders",
-        "cart": "/cart"
+        "source": "/sources",
+        "sourceType": "/sourceTypes",
+        "income": "/incomes",
+        "expense": "/expenses"
 
     }
 }

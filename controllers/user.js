@@ -8,10 +8,6 @@ module.exports.registerUser = (req,res) => {
   if (!req.body.email.includes("@")){
       return res.status(400).send({ error: "Email invalid" });
   }
-  // Checks if the mobile number has the correct number of characters
-  else if (req.body.mobileNo.length !== 11){
-      return res.status(400).send({ error: "Mobile number invalid" });
-  }
   // Checks if the password has atleast 8 characters
   else if (req.body.password.length < 8) {
       return res.status(400).send({ error: "Password must be atleast 8 characters" });
@@ -20,7 +16,6 @@ module.exports.registerUser = (req,res) => {
       let newUser = new User({
           username : req.body.username,
           email : req.body.email,
-          mobileNo : req.body.mobileNo,
           password : bcrypt.hashSync(req.body.password, 10)
       })
 
@@ -158,32 +153,3 @@ module.exports.updatePassword = async (req, res) => {
 		res.status(500).json({message: "Internal Server Error"})
 	}
 }
-
-
-module.exports.singleUserDetails = async (req, res) => {
-    try {
-        // Check if the current user is an admin
-        if (!req.user.isAdmin) {
-            return res.status(403).send({ error: "Only admin users can access user details" });
-        }
-
-        // Get the userId from the request parameters
-        const { userId } = req.params;
-
-        // Find the user by ID
-        const user = await User.findById(userId);
-
-        if (!user) {
-            return res.status(404).send({ error: "User not found" });
-        }
-
-        // Remove sensitive information before sending the response
-        user.password = "";
-
-        // Return the user details
-        return res.status(200).send({ user });
-    } catch (error) {
-        console.error("Error in fetching user details", error);
-        return res.status(500).send({ error: 'Failed to fetch user details' });
-    }
-};

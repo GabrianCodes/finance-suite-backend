@@ -1,16 +1,16 @@
 const express = require("express");
-const expenseController = require("../controllers/expenseController");
-const auth = require("../config/auth");
+const expenseController = require("../controllers/expense");
+const auth = require("../auth");
 
 const { verify, verifyAdmin } = auth;
 
 const router = express.Router();
 
 // Route to create a new expense
-router.post("/", verify, expenseController.createExpense);
+router.post("/", verify, expenseController.postExpense);
 
 // Route to get all expenses (Admin can see all, regular users see their own)
-router.get("/", verify, expenseController.getExpenses);
+router.get("/", verify, expenseController.getAllExpenses);
 
 // Route to get a specific expense by ID (Admin and owner can view)
 router.get("/:expenseId", verify, expenseController.getSingleExpense);

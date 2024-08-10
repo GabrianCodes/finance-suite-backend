@@ -6,6 +6,12 @@ const incomeSchema = new mongoose.Schema({
         type: String,
         required: [true, 'User ID is required!']
     },
+
+    sourceId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Source',
+        required: false
+    },
     
     name: {
         type: String,
@@ -19,7 +25,7 @@ const incomeSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Income amount is Required']
     },
-    createdOn: {
+    date: {
         type: Date,
         default: Date.now
     }

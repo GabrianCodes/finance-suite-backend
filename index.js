@@ -10,9 +10,10 @@ const cors = require("cors");
 // [SECTION] Routes
 // Allows access to routes defined within our application
 const userRoutes = require("./routes/user");
-const productRoutes = require("./routes/product");
-const cartRoute = require("./routes/cart");
-const orderRoute = require("./routes/order");
+const expenseRoutes = require("./routes/expense");
+const incomeRoute = require("./routes/income");
+const sourceRoute = require("./routes/source");
+const sourceTypeRoute = require("./routes/sourceType");
 
 
 // [SECTION] Environment Setup
@@ -29,7 +30,7 @@ app.use(cors());
 
 // [SECTION] Database Connection
 // Connect to our MongoDB database
-mongoose.connect("mongodb+srv://gabrianDB:1xTOseVzLm7IFIGp@atlascluster.qvoxy99.mongodb.net/csp2-b385-sarmiento-lozano?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect("mongodb+srv://gabrianDB:1xTOseVzLm7IFIGp@atlascluster.qvoxy99.mongodb.net/financesuitetest?retryWrites=true&w=majority&appName=FinaceSuite");
 
 // Prompt a message in the terminal once the connection is "open"
 mongoose.connection.once("open", () => console.log("Now connected to MongoDB Atlas."));
@@ -41,9 +42,11 @@ mongoose.connection.once("open", () => console.log("Now connected to MongoDB Atl
 // Defines the "/users" string to be included for all user routes defined in the "user" router file.
 // Groups all routes in userRoutes under "/users"
 app.use("/users", userRoutes);
-app.use("/products", productRoutes);
-app.use("/cart", cartRoute);
-app.use("/orders", orderRoute);
+app.use("/expenses", expenseRoutes);
+app.use("/incomes", incomeRoute);
+app.use("/sources", sourceRoute);
+app.use("/sourceTypes", sourceTypeRoute);
+
 
 
 
