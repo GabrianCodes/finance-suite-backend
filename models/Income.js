@@ -13,15 +13,15 @@ const incomeSchema = new mongoose.Schema({
         required: false
     },
     
-    name: {
+    incomeName: {
         type: String,
         required: [true, 'Income Name is Required']
     },
-    description: {
+    incomeDescription: {
         type: String,
         required: [true, 'Income Description is Required']
     },
-    amount: {
+    incomeAmount: {
         type: Number,
         required: [true, 'Income amount is Required']
     },

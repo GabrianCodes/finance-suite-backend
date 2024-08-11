@@ -72,7 +72,7 @@ module.exports.updateSource = async (req, res) => {
 };
 
 module.exports.deleteSource = async (req, res) => {
-    // Logic to delete a specific Source by ID normal user only can delete to his own admin can delete to anyone's
+    // Logic to delete a specific Source by ID normal user only can delete his own, admin can delete anyone's
     try {
         const source = await Source.findById(req.params.sourceId);
         if (!source) {
@@ -80,7 +80,7 @@ module.exports.deleteSource = async (req, res) => {
         }
 
         if (req.user.isAdmin || source.userId === req.user.id) {
-            await source.remove();
+            await Source.deleteOne({ _id: req.params.sourceId });
             res.status(200).json({ message: "Source deleted" });
         } else {
             res.status(403).json({ message: "Access denied" });

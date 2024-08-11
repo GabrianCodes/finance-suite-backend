@@ -22,10 +22,6 @@ const sourceSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Source Description is required!']
     },
-    date: {
-        type: Date,
-        default: Date.now
-    },
     userId: {
         type: String,
         required: [true, 'User ID is required!']

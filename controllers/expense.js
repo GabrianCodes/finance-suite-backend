@@ -69,7 +69,7 @@ module.exports.updateExpense = async (req, res) => {
 };
 
 module.exports.deleteExpense = async (req, res) => {
-    // Logic to delete a specific Expense by ID normal user only can delete to his own admin can delete to anyone's
+    // Logic to delete a specific Expense by ID normal user only can delete his own, admin can delete anyone's
     try {
         const expense = await Expense.findById(req.params.expenseId);
         if (!expense) {
@@ -77,7 +77,7 @@ module.exports.deleteExpense = async (req, res) => {
         }
 
         if (req.user.isAdmin || expense.userId === req.user.id) {
-            await expense.remove();
+            await Expense.deleteOne({ _id: req.params.expenseId });
             res.status(200).json({ message: "Expense deleted" });
         } else {
             res.status(403).json({ message: "Access denied" });
