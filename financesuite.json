@@ -6,7 +6,8 @@
         "source": "/sources",
         "sourceType": "/sourceTypes",
         "income": "/incomes",
-        "expense": "/expenses"
+        "expense": "/expenses",
+        "data": "/data"
 
     }
 }
