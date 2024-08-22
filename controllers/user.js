@@ -2,31 +2,44 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const auth = require("../auth");
 
-module.exports.registerUser = (req,res) => {
-
-  // Checks if the email is in the right format
-  if (!req.body.email.includes("@")){
+module.exports.registerUser = async (req, res) => {
+  try {
+    // Check if the email is in the right format
+    if (!req.body.email.includes("@")) {
       return res.status(400).send({ error: "Email invalid" });
-  }
-  // Checks if the password has atleast 8 characters
-  else if (req.body.password.length < 8) {
-      return res.status(400).send({ error: "Password must be atleast 8 characters" });
-  // If all needed requirements are achieved
-  } else {
-      let newUser = new User({
-          username : req.body.username,
-          email : req.body.email,
-          password : bcrypt.hashSync(req.body.password, 10)
-      })
+    }
 
-      return newUser.save()
-      .then((result) => res.status(201).send({ message: "Registered Successfully" }))
-      .catch(err => {
-        console.error("Error in saving: ", err);
-        return res.status(500).send({ error: "Error in save" })
-      })
-  }
+    // Check if the password has at least 8 characters
+    if (req.body.password.length < 8) {
+      return res.status(400).send({ error: "Password must be at least 8 characters" });
+    }
 
+    // Check if the username already exists
+    const existingUsername = await User.findOne({ username: req.body.username });
+    if (existingUsername) {
+      return res.status(400).send({ error: "Username already exists" });
+    }
+
+    // Check if the email already exists
+    const existingEmail = await User.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res.status(400).send({ error: "Email already exists" });
+    }
+
+    // If all validations pass, create a new user
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 10)
+    });
+
+    // Save the user to the database
+    const result = await newUser.save();
+    return res.status(201).send({ message: "Registered Successfully" });
+  } catch (err) {
+    console.error("Error in saving: ", err);
+    return res.status(500).send({ error: "Error in save" });
+  }
 };
 
 module.exports.login = (req, res) => {

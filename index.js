@@ -14,6 +14,7 @@ const expenseRoutes = require("./routes/expense");
 const incomeRoute = require("./routes/income");
 const sourceRoute = require("./routes/source");
 const sourceTypeRoute = require("./routes/sourceType");
+const dataRoute = require("./routes/data");
 
 
 // [SECTION] Environment Setup
@@ -46,6 +47,7 @@ app.use("/expenses", expenseRoutes);
 app.use("/incomes", incomeRoute);
 app.use("/sources", sourceRoute);
 app.use("/sourceTypes", sourceTypeRoute);
+app.use("/data", dataRoute);
 
 
 
