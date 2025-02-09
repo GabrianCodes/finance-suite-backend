@@ -1,5 +1,8 @@
 # Finance Suite Demo App Overview:
 
+**Installation:**
+
+```npm install```
 
 **User Credentials:**
 
